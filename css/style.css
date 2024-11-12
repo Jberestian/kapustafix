@@ -585,6 +585,10 @@ a:focus {
   color: #0355cc;
 }
 
+.client_section {
+  padding-top: 75px;
+}
+
 .client_section .heading_container {
   -webkit-box-align: center;
   -ms-flex-align: center;
