@@ -4,6 +4,22 @@ body {
   color: #040000;
 }
 
+/* .video_block {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+video {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: -70%;
+  width: 100%;
+  -webkit-transform: rotate(25deg);
+  transform: rotate(25deg);
+} */
+
 .layout_padding {
   padding-top: 120px;
   padding-bottom: 120px;
