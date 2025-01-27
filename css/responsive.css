@@ -86,10 +86,10 @@
 }
 
 @media (min-width: 576px) {
-  .slider_section {
+  /* .slider_section {
     background-size: cover;
     background-position: center;
-  }
+  } */
 }
 
 @media (max-width: 480px) {
@@ -106,8 +106,8 @@
     max-width: 1170px;
   }
 
-  .slider_section {
+  /* .slider_section {
     background-size: cover;
     background-position: center;
-  }
+  } */
 }

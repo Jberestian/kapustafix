@@ -299,7 +299,7 @@ a:focus {
   flex: 1;
   display: flex;
   align-items: center;
-  background-size: cover;
+  background: cover no-repeat;
   background-position: bottom;
 
   .row {
@@ -347,6 +347,7 @@ a:focus {
 
   .feature_container {
     display: flex;
+    margin-top: 200px;
 
     .box {
       flex: 1;
