@@ -19,6 +19,11 @@ video {
   -webkit-transform: rotate(25deg);
   transform: rotate(25deg);
 } */
+
+/* .box {
+  background-color: inherit;
+} */
+
 .layout_padding {
   padding-top: 120px;
   padding-bottom: 120px;
@@ -773,7 +778,7 @@ a:focus {
 }
 
 .info_section .social-box .box {
-  background-color: #ffffff;
+  background-color: inherit;
   padding: 5px 15px;
 }
 
