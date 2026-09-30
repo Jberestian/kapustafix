@@ -31,6 +31,8 @@
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+    <!-- gallery carousel style -->
+    <link href="css/gallery.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -90,39 +92,56 @@
       <!-- end header section -->
     </div>
 
-    <!-- about section -->
+    <!-- gallery section -->
 
-    <section class="about_section layout_padding">
+    <section class="gallery_section layout_padding">
       <div class="container">
-        <!-- <div class="row">
-          <div class="col-lg-5 col-md-6">
-            <div class="detail-box">
-              <h2>About us</h2>
-              <p>
-                Have over 8 years of experience in the trade. We have a proven
-                track record of innovative designs, effective problem-solving,
-                and attention to detail. We can take on all types of jobs from
-                small domestic work to larger commercial projects, all carried
-                out to the highest standards, and at very competitive prices.
-                Our services: - Kitchens - Flooring - Doors - 2nd Fix - Decking
-                - Roofing Our goal is to meet and exceed the expectations of
-                every customer. We’re always happy to discuss your
-                ideas/requirements – please contact us at the above number. We
-                look forward to working with you!
-              </p>
-              <a href=""> Read More </a>
-            </div>
+        <div class="heading_container">
+          <h2>Our Work</h2>
+          <p>
+            A selection of recent joinery, decking and flooring projects.
+          </p>
+        </div>
+
+        <div class="g-carousel" id="gCarousel">
+          <div class="g-filters" role="group" aria-label="Filter by category"></div>
+          <div class="g-stage">
+            <div class="g-stage__bg"></div>
+            <img class="g-stage__img" src="" alt="" />
+            <button
+              type="button"
+              class="g-arrow g-arrow--prev"
+              aria-label="Previous photo"
+            >
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button
+              type="button"
+              class="g-arrow g-arrow--next"
+              aria-label="Next photo"
+            >
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </button>
+            <div class="g-counter" aria-live="polite"></div>
           </div>
-          <div class="col-lg-7 col-md-6">
-            <div class="img-box">
-              <img src="images/about-img.jpg" alt="" />
-            </div>
+
+          <div class="g-caption" aria-live="polite">
+            <span class="g-caption__tag"></span>
+            <h3 class="g-caption__title"></h3>
+            <p class="g-caption__text"></p>
           </div>
-        </div> -->
+
+          <div class="g-thumbs"></div>
+        </div>
       </div>
     </section>
 
-    <!-- end about section -->
+    <div class="g-lightbox" id="gLightbox" role="dialog" aria-label="Enlarged photo">
+      <button type="button" class="g-lightbox__close" aria-label="Close">&times;</button>
+      <img src="" alt="" />
+    </div>
+
+    <!-- end gallery section -->
 
     <!-- info section -->
     <section class="info_section">
@@ -203,6 +222,7 @@
     <script src="js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/gallery.js"></script>
     <!-- Google Map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
     <!-- End Google Map -->
