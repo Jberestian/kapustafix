@@ -266,3 +266,22 @@
     height: 46px;
   }
 }
+
+/* Quote button under caption */
+.g-quote {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 9px 26px;
+  border: 1px solid #0355cc;
+  background: #0355cc;
+  color: #fff;
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.g-quote:hover {
+  background: transparent;
+  color: #0355cc;
+  text-decoration: none;
+}

@@ -136,6 +136,14 @@
   var lightbox = document.getElementById("gLightbox");
   var lightboxImg = lightbox.querySelector("img");
   var filtersBox = root.querySelector(".g-filters");
+  var quote = root.querySelector(".g-quote");
+  var TYPE_MAP = {
+    Joinery: "Joinery & cabinetry",
+    "Fit-Out": "Joinery & cabinetry",
+    Kitchens: "Kitchens",
+    Decking: "Decking",
+    Flooring: "Flooring",
+  };
   var current = 0;
   var thumbs = [];
   var view = slides.slice();
@@ -150,7 +158,7 @@
       b.className = "g-thumb";
       b.setAttribute("aria-label", "Show photo " + (i + 1) + ": " + s.title);
       var t = document.createElement("img");
-      t.src = s.img.replace("gallery/", "gallery/thumb-") + ".jpg";
+      t.src = s.img.replace("gallery/", "gallery/thumb-") + ".webp";
       t.alt = "";
       t.loading = "lazy";
       b.appendChild(t);
@@ -188,7 +196,7 @@
   function show(i) {
     current = (i + view.length) % view.length;
     var s = view[current];
-    var src = s.img + ".jpg";
+    var src = s.img + ".webp";
     img.classList.add("is-fading");
     setTimeout(function () {
       img.src = src;
@@ -203,6 +211,9 @@
     tag.textContent = s.tag;
     title.textContent = s.title;
     text.textContent = s.text;
+    quote.href =
+      "contact.html?type=" + encodeURIComponent(TYPE_MAP[s.tag] || "Other") +
+      "&ref=" + encodeURIComponent(s.title) + "#quote";
     thumbs.forEach(function (b, k) {
       b.classList.toggle("is-active", k === current);
     });
@@ -214,7 +225,7 @@
     }
     // preload neighbours
     [current + 1, current - 1].forEach(function (k) {
-      new Image().src = view[(k + view.length) % view.length].img + ".jpg";
+      new Image().src = view[(k + view.length) % view.length].img + ".webp";
     });
   }
 
@@ -250,7 +261,7 @@
 
   // lightbox
   function openLightbox() {
-    lightboxImg.src = view[current].img + ".jpg";
+    lightboxImg.src = view[current].img + ".webp";
     lightboxImg.alt = view[current].alt;
     lightbox.classList.add("is-open");
   }
@@ -261,4 +272,12 @@
   lightbox.addEventListener("click", closeLightbox);
 
   show(0);
+
+  // Deep link: gallery.html#Decking opens that category
+  var hash = decodeURIComponent((location.hash || "").slice(1)).toLowerCase();
+  if (hash) {
+    Array.prototype.forEach.call(filtersBox.children, function (btn) {
+      if (btn.textContent.toLowerCase() === hash) btn.click();
+    });
+  }
 })();
