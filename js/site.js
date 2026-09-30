@@ -4,9 +4,11 @@
   // SETTINGS — edit here
   // ------------------------------------------------------------------
   var CONFIG = {
-    // Formspree endpoint, e.g. "https://formspree.io/f/abcdwxyz".
-    // Leave empty to fall back to opening the visitor's email app.
-    formEndpoint: "",
+    // Where the quote form is delivered by email (server-side, silent).
+    // FormSubmit needs no account: the FIRST submission sends an activation
+    // link to the address below — click it once. (Formspree also works:
+    // "https://formspree.io/f/xxxxxxx".) Empty = open the visitor's email app.
+    formEndpoint: "https://formsubmit.co/ajax/kapustafix@gmail.com",
     email: "kapustafix@gmail.com",
     whatsapp: "447448219217", // international format, no + or spaces
     // Analytics (optional). Leave empty to disable.
@@ -148,7 +150,6 @@
     var status = form.querySelector(".form-status");
     var typeSel = form.querySelector('[name="type"]');
     var msg = form.querySelector('[name="message"]');
-    var waLink = form.querySelector(".wa-link");
 
     // Prefill from ?type=...&ref=...
     var qs = new URLSearchParams(window.location.search);
@@ -182,13 +183,11 @@
       status.textContent = text;
     }
 
-    if (waLink) {
-      waLink.addEventListener("click", function () {
-        var d = collect();
-        var text = "Hi Kapustafix, I'd like a quote.\n" + summary(d);
-        waLink.href =
-          "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text);
-      });
+    function waUrl(d) {
+      return (
+        "https://wa.me/" + CONFIG.whatsapp + "?text=" +
+        encodeURIComponent("Hi Kapustafix, I'd like a quote.\n" + summary(d))
+      );
     }
 
     form.addEventListener("submit", function (e) {
@@ -197,37 +196,76 @@
       var d = collect();
       if (!d.name || !d.phone || !d.message) {
         setStatus("err", "Please fill in your name, phone number and a short description of the job.");
+        status.scrollIntoView({ block: "center", behavior: "smooth" });
         return;
       }
       var btn = form.querySelector("button[type=submit]");
+      var wantWa = !form.wa || form.wa.checked;
+      var waOpened = false;
+
+      // 1) WhatsApp — must be opened synchronously inside the click to avoid popup blockers
+      if (wantWa) {
+        var w = window.open(waUrl(d), "_blank");
+        waOpened = !!w;
+      }
+
+      // 2) Email — delivered server-side in the background
+      function done(emailOk) {
+        var parts = [];
+        if (emailOk) parts.push("Your request has been sent by email.");
+        else if (waOpened) parts.push("We couldn't send it by email, but");
+        if (waOpened) parts.push(emailOk ? "WhatsApp is open with your message — just press Send there too." : "WhatsApp is open with your message — please press Send there.");
+        if (wantWa && !waOpened) parts.push('<a href="' + waUrl(d) + '" target="_blank" rel="noopener">Tap here to send it via WhatsApp as well.</a>');
+        if (emailOk || waOpened) {
+          status.className = "form-status is-ok";
+          status.innerHTML = (emailOk ? "Thank you! " : "") + parts.join(" ");
+          if (emailOk) form.reset();
+          track("quote_submit");
+        } else {
+          setStatus("err", "Sorry, we couldn't send your request. Please call us or message us on WhatsApp instead.");
+        }
+        status.scrollIntoView({ block: "center", behavior: "smooth" });
+      }
+
       if (CONFIG.formEndpoint) {
         btn.disabled = true;
         setStatus("", "Sending…");
+        var payload = {
+          name: d.name,
+          phone: d.phone,
+          email: d.email,
+          type: d.type,
+          message: d.message,
+          _subject: "New quote request — " + d.type + " — " + d.name,
+          _template: "table",
+          _captcha: "false",
+        };
+        if (d.email) payload._replyto = d.email;
         fetch(CONFIG.formEndpoint, {
           method: "POST",
+          keepalive: true,
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(d),
+          body: JSON.stringify(payload),
         })
           .then(function (r) {
-            if (!r.ok) throw new Error("bad response");
-            form.reset();
-            setStatus("ok", "Thank you! Your request has been sent — we'll get back to you shortly.");
-            track("quote_submit");
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              var ok = r.ok && j.success !== false && j.success !== "false";
+              done(ok);
+            });
           })
           .catch(function () {
-            setStatus("err", "Sorry, something went wrong. Please call or message us on WhatsApp instead.");
+            done(false);
           })
           .then(function () {
             btn.disabled = false;
           });
       } else {
-        // No form service configured yet: open the visitor's email app
+        // No form service configured: open the visitor's email app instead
         var subject = "Quote request — " + d.type;
         window.location.href =
           "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent(subject) +
           "&body=" + encodeURIComponent(summary(d));
-        setStatus("ok", "Opening your email app… If nothing happens, please call or WhatsApp us.");
-        track("quote_submit");
+        done(true);
       }
     });
   }

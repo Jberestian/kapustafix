@@ -94,9 +94,9 @@
     },
     {
       tag: "Flooring",
-      title: "Oak Parquet Installation (Work in Progress)",
-      text: "Professional installation of light oak parquet flooring. Boards are laid in a precise symmetrical pattern with tight, uniform joints throughout. Edges and perimeter cuts are neatly fitted and aligned. The floor is clean, flat and ready for sanding, sealing and final finishing. High attention to detail and consistent spacing across the whole area.",
-      photos: [{ img: "parquet-basketweave", alt: "Light oak basket-weave parquet floor being installed" }],
+      title: "Herringbone Parquet Installation (Work in Progress)",
+      text: "Professional installation of light oak herringbone parquet flooring. Boards are laid in a precise symmetrical pattern with tight, uniform joints throughout. Edges and perimeter cuts are neatly fitted and aligned. The floor is clean, flat and ready for sanding, sealing and final finishing. High attention to detail and consistent spacing across the whole area.",
+      photos: [{ img: "parquet-basketweave", alt: "Light oak parquet floor being installed" }],
     },
     {
       tag: "Flooring",

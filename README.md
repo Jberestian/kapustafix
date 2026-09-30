@@ -10,8 +10,9 @@ Static website (HTML / Bootstrap). No build step — open `index.html` or deploy
    grep -rl "https://YOUR-DOMAIN" --include=*.html --include=*.xml --include=*.txt . | xargs sed -i 's#https://YOUR-DOMAIN#https://your-real-domain.co.uk#g'
    ```
 
-2. **Quote form** — create a free form at https://formspree.io and put its endpoint in `js/site.js`
-   (`CONFIG.formEndpoint`). Until then the form opens the visitor's email app instead.
+2. **Quote form** — one click sends the request by email (FormSubmit, no account) and opens WhatsApp
+   with the same message prefilled. **Activate once:** submit the form yourself on the live site, then click the
+   confirmation link FormSubmit emails to kapustafix@gmail.com. Endpoint/number are in `js/site.js` (`CONFIG`).
 
 3. **Analytics (optional)** — `CONFIG.plausibleDomain` (cookieless) or `CONFIG.ga4Id`
    (GA4 needs a cookie-consent banner in the UK).

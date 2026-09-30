@@ -80,7 +80,7 @@
     display: none;
   }
   body {
-    padding-bottom: 52px;
+    padding-bottom: 60px;
   }
 }
 
@@ -252,10 +252,25 @@
   align-items: center;
   gap: 14px;
 }
-.contact_section .form-actions .wa-link {
-  margin-top: 15px;
+.contact_section .wa-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
   color: #128c7e;
   font-weight: 700;
+  cursor: pointer;
+}
+.contact_section .wa-check input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+}
+.form-status a {
+  font-weight: 700;
+  text-decoration: underline;
 }
 .contact-card {
   background: #0a0f43;
@@ -443,4 +458,45 @@
   color: #666;
   margin-top: 14px;
   font-size: 14px;
+}
+
+/* ---------- Privacy policy page ---------- */
+.policy_section .policy {
+  max-width: 820px;
+  margin: 0 auto;
+  line-height: 1.75;
+  color: #333;
+}
+.policy_section h1 {
+  font-family: "Merriweather Sans", sans-serif;
+  font-weight: 700;
+  color: #0a0f43;
+  font-size: 34px;
+  margin-bottom: 6px;
+}
+.policy_section h2 {
+  font-family: "Merriweather Sans", sans-serif;
+  font-weight: 700;
+  color: #0a0f43;
+  font-size: 20px;
+  margin: 32px 0 10px;
+}
+.policy_section .policy__date {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+.policy_section ul {
+  padding-left: 22px;
+}
+.policy_section li {
+  margin-bottom: 6px;
+}
+.form-note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: #666;
+}
+.footer_section a {
+  color: inherit;
 }
