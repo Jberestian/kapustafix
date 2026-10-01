@@ -8,7 +8,7 @@
     // FormSubmit needs no account: the FIRST submission sends an activation
     // link to the address below — click it once. (Formspree also works:
     // "https://formspree.io/f/xxxxxxx".) Empty = open the visitor's email app.
-    formEndpoint: "https://formsubmit.co/ajax/kapustafix@gmail.com",
+    formEndpoint: "https://formsubmit.co/ajax/bc89b4276a9ac312dec00921682b6d45",
     email: "kapustafix@gmail.com",
     whatsapp: "447448219217", // international format, no + or spaces
     // Analytics (optional). Leave empty to disable.
